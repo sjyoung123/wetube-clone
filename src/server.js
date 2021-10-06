@@ -10,7 +10,10 @@ const logger = morgan("dev");
 const app = express();
 const PORT = "4000";
 
+//app.disable("x-powered-by");
+
 app.set("view engine","pug");
+app.set("views", "./src/views");
 
 app.use(logger);
 
