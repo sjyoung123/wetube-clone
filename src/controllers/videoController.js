@@ -35,20 +35,23 @@ export const getUpload = (req, res) => {
 };
 export const postUpload = (req, res) => {
   const { title, description, hashtags } = req.body;
-  Video.create({
-    title,
-    description,
-    creatAt: Date.now(),
-    hashtags: hashtags
-      .split(",")
-      .map((word) =>
-        word.trim().charAt(0) === "#" ? word.trim() : `#${word.trim()}`
-      ),
-    meta: {
-      views: 0,
-      rating: 0,
-    },
-  });
+  try {
+    Video.create({
+      title,
+      description,
 
-  return res.redirect("/");
+      hashtags: hashtags
+        .split(",")
+        .map((word) =>
+          word.trim().charAt(0) === "#" ? word.trim() : `#${word.trim()}`
+        ),
+    });
+
+    return res.redirect("/");
+  } catch (error) {
+    return res.render("upload", {
+      pageTitle: "Upload Video",
+      errorMessage: error._message,
+    });
+  }
 };
