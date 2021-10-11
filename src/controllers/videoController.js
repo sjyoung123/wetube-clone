@@ -34,7 +34,21 @@ export const getUpload = (req, res) => {
   return res.render("upload", { pageTitle: "Upload Video" });
 };
 export const postUpload = (req, res) => {
-  const { title } = req.body;
+  const { title, description, hashtags } = req.body;
+  Video.create({
+    title,
+    description,
+    creatAt: Date.now(),
+    hashtags: hashtags
+      .split(",")
+      .map((word) =>
+        word.trim().charAt(0) === "#" ? word.trim() : `#${word.trim()}`
+      ),
+    meta: {
+      views: 0,
+      rating: 0,
+    },
+  });
 
   return res.redirect("/");
 };
