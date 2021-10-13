@@ -58,11 +58,12 @@ export const postUpload = (req, res) => {
       title,
       description,
 
-      hashtags: hashtags
-        .split(",")
-        .map((word) =>
-          word.trim().charAt(0) === "#" ? word.trim() : `#${word.trim()}`
-        ),
+      hashtags,
+      // hashtags
+      // .split(",")
+      // .map((word) =>
+      //   word.trim().charAt(0) === "#" ? word.trim() : `#${word.trim()}`
+      // ),
     });
 
     return res.redirect("/");
