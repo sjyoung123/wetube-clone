@@ -3,7 +3,9 @@ mixin videoMixin(video)
         a(href=`/videos/${video.id}`)=video.title
     ul 
         li=video.description
-        li=video.hashtags 
+    div  
+        each hashtag in video.hashtags 
+            span=hashtag
     small=video.creatAt
     hr
             
