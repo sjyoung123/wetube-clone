@@ -1,6 +1,7 @@
 import express from "express";
 import morgan from "morgan";
 import session from "express-session";
+import { localsMiddleware } from "./middleware";
 import rootRouter from "./routers/rootRouter";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
@@ -24,6 +25,8 @@ app.use(
     saveUninitialized: true,
   })
 ); //Created before Router.
+
+app.use(localsMiddleware);
 
 app.use("/", rootRouter);
 app.use("/users", userRouter);
