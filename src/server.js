@@ -22,8 +22,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(
   session({
     secret: "hello",
-    resave: true,
-    saveUninitialized: true,
+    resave: false,
+    saveUninitialized: false,
     store: MongoStore.create({ mongoUrl: "mongodb://127.0.0.1:27017/wetube" }),
   })
 ); //Created before Router.
