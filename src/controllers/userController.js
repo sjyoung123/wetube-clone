@@ -117,32 +117,30 @@ export const finishGithubLogin = async (req, res) => {
     if (!emailObj) {
       return res.redirect("/login");
     }
-    const existingUser = await User.findOne({ email: emailObj.email });
-    if (existingUser) {
-      req.session.loggedIn = true;
-      req.session.user = existingUser;
-      return res.redirect("/"); //Email === Github Email
-    } else {
-      const user = await User.create({
+    let user = await User.findOne({ email: emailObj.email });
+    if (!user) {
+      user = await User.create({
         email: emailObj.email,
         socialOnly: true,
+        avatarUrl: userData.avatar_url,
         username: userData.name,
         password: "",
         name: userData.name ? userData.name : userData.login,
         location: userData.location,
       });
+    } else {
       req.session.loggedIn = true;
       req.session.user = user;
       return res.redirect("/");
-    } // ONLY LOGIN WITH GITHUB.
+    }
   } else {
     return res.redirect("/login");
   }
 };
 
+export const logout = (req, res) => {
+  req.session.destroy();
+  return res.redirect("/");
+};
 export const edit = (req, res) => res.send("Edit user");
-export const remove = (req, res) => res.send("Remove user");
 export const see = (req, res) => res.send("See user");
-export const logout = (req, res) => res.send("Log out");
-
-//https://github.com/login/oauth/authorize?client_id=90a5dbf651c94d37fc0c&allow_signup=false
