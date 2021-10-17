@@ -121,8 +121,20 @@ export const finishGithubLogin = async (req, res) => {
     if (existingUser) {
       req.session.loggedIn = true;
       req.session.user = existingUser;
+      return res.redirect("/"); //Email === Github Email
+    } else {
+      const user = await User.create({
+        email: emailObj.email,
+        socialOnly: true,
+        username: userData.name,
+        password: "",
+        name: userData.name ? userData.name : userData.login,
+        location: userData.location,
+      });
+      req.session.loggedIn = true;
+      req.session.user = user;
       return res.redirect("/");
-    }
+    } // ONLY LOGIN WITH GITHUB.
   } else {
     return res.redirect("/login");
   }
