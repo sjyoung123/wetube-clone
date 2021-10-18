@@ -44,7 +44,7 @@ export const getLogin = (req, res) =>
 export const postLogin = async (req, res) => {
   const { username, password } = req.body;
   const pageTitle = "Login";
-  const user = await User.findOne({ username });
+  const user = await User.findOne({ username, socialOnly: false });
   if (!user) {
     return res.status(400).render("login", {
       pageTitle,
@@ -142,5 +142,8 @@ export const logout = (req, res) => {
   req.session.destroy();
   return res.redirect("/");
 };
-export const edit = (req, res) => res.send("Edit user");
+export const getEdit = (req, res) => {
+  res.render("edit-profile", { pageTitle: "Edit-profile" });
+};
+export const postEdit = (req, res) => res.send("Edit user");
 export const see = (req, res) => res.send("See user");
