@@ -9,3 +9,18 @@ export const localsMiddleware = (req, res, next) => {
   next();
 };
 //res.locals => 모든 템플릿에서 공유한다.
+
+export const loggedInOnlyMiddleware = (req, res, next) => {
+  if (req.session.loggedIn) {
+    return next();
+  } else {
+    return res.redirect("/login");
+  }
+};
+export const loggedOutOnlyMiddleware = (req, res, next) => {
+  if (!req.session.loggedIn) {
+    return next();
+  } else {
+    return res.redirect("/");
+  }
+};
