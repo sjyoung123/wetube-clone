@@ -146,34 +146,34 @@ export const getEdit = (req, res) => {
   res.render("edit-profile", { pageTitle: "Edit-profile" });
 };
 export const postEdit = async (req, res) => {
-  try {
-    const {
-      session: {
-        user: { _id },
-      },
-      body: { name, email, username, location },
-    } = req;
-    // const { user } = req.session;
-    // const { _id } = user;
-    // console.log(_id);
-    // const { name, email, username, location } = req.body;
-    const user = await User.findByIdAndUpdate(
-      _id,
-      {
-        name,
-        email,
-        username,
-        location,
-      },
-      { new: true }
-    );
-    req.session.user = user;
-    return res.redirect("edit");
-  } catch {
-    res.render("edit-profile", {
-      pageTitle: "Edit-profile",
+  const {
+    session: {
+      user: { _id },
+    },
+    body: { name, email, username, location },
+  } = req;
+  const findByUsername = await User.findOne({ username });
+  const findByEmail = await User.findOne({ email });
+  if (
+    (findByUsername != null && findByUsername._id != _id) ||
+    (findByEmail != null && findByEmail._id != _id)
+  ) {
+    return res.render("edit-profile", {
+      pageTitle: "Edit-Profile",
       errorMessage: "This email or username is already taken.",
     });
   }
+  const user = await User.findByIdAndUpdate(
+    _id,
+    {
+      name,
+      email,
+      username,
+      location,
+    },
+    { new: true }
+  );
+  req.session.user = user;
+  return res.redirect("edit");
 };
 export const see = (req, res) => res.send("See user");
