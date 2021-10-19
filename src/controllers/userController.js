@@ -152,6 +152,7 @@ export const postEdit = async (req, res) => {
     },
     body: { name, email, username, location },
   } = req;
+  console.log(req.file);
   const findByUsername = await User.findOne({ username });
   const findByEmail = await User.findOne({ email });
   if (

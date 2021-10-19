@@ -9,7 +9,11 @@ import {
   getChangePassword,
   postChangePassword,
 } from "../controllers/userController";
-import { loggedInOnlyMiddleware, loggedOutOnlyMiddleware } from "../middleware";
+import {
+  loggedInOnlyMiddleware,
+  loggedOutOnlyMiddleware,
+  uploadFile,
+} from "../middleware";
 const userRouter = express.Router();
 
 userRouter.get("/logout", logout, loggedInOnlyMiddleware);
@@ -17,7 +21,7 @@ userRouter
   .route("/edit")
   .all(loggedInOnlyMiddleware)
   .get(getEdit)
-  .post(postEdit);
+  .post(uploadFile.single("avatar"), postEdit);
 userRouter
   .route("/change-password")
   .all(loggedInOnlyMiddleware)

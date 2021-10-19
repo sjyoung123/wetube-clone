@@ -1,3 +1,5 @@
+import multer from "multer";
+
 export const localsMiddleware = (req, res, next) => {
   res.locals.loggedIn = Boolean(req.session.loggedIn);
   //   if (req.session.loggedIn) {
@@ -24,3 +26,5 @@ export const loggedOutOnlyMiddleware = (req, res, next) => {
     return res.redirect("/");
   }
 };
+
+export const uploadFile = multer({ dest: "upload/" });
