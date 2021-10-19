@@ -6,6 +6,8 @@ import {
   logout,
   startGithubLogin,
   finishGithubLogin,
+  getChangePassword,
+  postChangePassword,
 } from "../controllers/userController";
 import { loggedInOnlyMiddleware, loggedOutOnlyMiddleware } from "../middleware";
 const userRouter = express.Router();
@@ -16,6 +18,11 @@ userRouter
   .all(loggedInOnlyMiddleware)
   .get(getEdit)
   .post(postEdit);
+userRouter
+  .route("/change-password")
+  .all(loggedInOnlyMiddleware)
+  .get(getChangePassword)
+  .post(postChangePassword);
 userRouter.get("/github/start", startGithubLogin, loggedOutOnlyMiddleware);
 userRouter.get("/github/finish", finishGithubLogin, loggedOutOnlyMiddleware);
 
