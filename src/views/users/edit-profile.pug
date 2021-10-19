@@ -1,6 +1,10 @@
 extends ../base
 block content 
     span=errorMessage
+    -if(loggedInUser.avatarUrl.startsWith("upload"))
+        img(src="/" + loggedInUser.avatarUrl,height="100",width="100")
+    -if(loggedInUser.avatarUrl.startsWith("http"))
+        img(src=loggedInUser.avatarUrl,height="100",width="100")    
     form(method="POST",enctype="multipart/form-data")
         label(for="avatar") Avatar 
         input(type="file",name="avatar",accept=".png, .jpg, .jepg",id="avatar")

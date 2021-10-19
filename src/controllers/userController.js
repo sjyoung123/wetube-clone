@@ -148,11 +148,13 @@ export const getEdit = (req, res) => {
 export const postEdit = async (req, res) => {
   const {
     session: {
-      user: { _id },
+      user: { _id, avatarUrl },
     },
     body: { name, email, username, location },
+    file,
   } = req;
-  console.log(req.file);
+  // Never Save Files on DB.
+
   const findByUsername = await User.findOne({ username });
   const findByEmail = await User.findOne({ email });
   if (
@@ -167,6 +169,7 @@ export const postEdit = async (req, res) => {
   const user = await User.findByIdAndUpdate(
     _id,
     {
+      avatarUrl: file ? file.path : avatarUrl,
       name,
       email,
       username,
