@@ -1,4 +1,5 @@
 import Video from "../models/Video";
+import User from "../models/Video";
 
 export const home = async (req, res) => {
   try {
@@ -47,6 +48,9 @@ export const getUpload = (req, res) => {
   return res.render("videos/upload", { pageTitle: "Upload Video" });
 };
 export const postUpload = (req, res) => {
+  const {
+    user: { _id },
+  } = req.session;
   const { path: videoUrl } = req.file;
   const { title, description, hashtags } = req.body;
   try {
@@ -55,6 +59,7 @@ export const postUpload = (req, res) => {
       description,
       videoUrl,
       hashtags: Video.formatHashtags(hashtags),
+      owner: _id,
     });
 
     return res.redirect("/");

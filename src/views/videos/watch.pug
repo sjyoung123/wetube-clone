@@ -7,8 +7,10 @@ block content
         p=video.description
         p=video.hashtags
         small=video.creatAt
+    div 
+        small Updated by #{loggedInUser.username}
         
-   
-    a(href=`${video.id}/edit`) Edit Video &rarr;
-    br
-    a(href=`${video.id}/delete`) Delete Video &rarr;
+    if String(video.owner) === String(loggedInUser._id)
+        a(href=`${video.id}/edit`) Edit Video &rarr;
+        br
+        a(href=`${video.id}/delete`) Delete Video &rarr;
