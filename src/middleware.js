@@ -27,4 +27,15 @@ export const loggedOutOnlyMiddleware = (req, res, next) => {
   }
 };
 
-export const uploadFile = multer({ dest: "upload/" });
+export const avatarUpload = multer({
+  dest: "upload/avatars",
+  limits: {
+    fileSize: 3000000,
+  },
+});
+export const videoUpload = multer({
+  dest: "upload/videos",
+  limits: {
+    fileSize: 10000000,
+  },
+});
