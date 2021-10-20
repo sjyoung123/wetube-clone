@@ -30,6 +30,6 @@ userRouter
 userRouter.get("/github/start", startGithubLogin, loggedOutOnlyMiddleware);
 userRouter.get("/github/finish", finishGithubLogin, loggedOutOnlyMiddleware);
 
-userRouter.get("/:id(\\d+)", see);
+userRouter.get("/:id", see);
 
 export default userRouter;
