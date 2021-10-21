@@ -7,12 +7,13 @@ block content
     h3 
         nav 
             a(href="/videos/upload") Upload Viedo.
-   
-    each video in videos 
-        div
-            +videoMixin(video)
-    else
-        li Sorry nothing found.
+    div.video-grid
+        each video in videos 
+            +video(video)
+           
+
+        else
+            span.emtpy__message No video found
 
           
 
