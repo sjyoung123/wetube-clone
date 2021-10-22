@@ -19,3 +19,14 @@
   height: 150px;
   border-radius: 50%;
 }
+.upload__form {
+  label {
+    font-size: 18px;
+    margin-bottom: 10px;
+    display: block;
+    cursor: pointer;
+  }
+  input[type="file"] {
+    display: none;
+  }
+}

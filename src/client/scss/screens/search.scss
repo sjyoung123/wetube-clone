@@ -1,7 +1,9 @@
 .search__form {
   display: flex;
   align-items: center;
-
+  padding: 0;
+  border: none;
+  background-color: transparent;
   margin-bottom: 60px;
   position: relative;
   input {

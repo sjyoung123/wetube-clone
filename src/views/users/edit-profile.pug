@@ -5,8 +5,8 @@ block content
     //-     img(src="/" + loggedInUser.avatarUrl,height="100",width="100")
     //- - if(loggedInUser.avatarUrl.startsWith("http"))
     //-     img(src=loggedInUser.avatarUrl,height="100",width="100")    
-    form(method="POST",enctype="multipart/form-data").edit-profile__form
-        label(for="avatar") Avatar upload
+    form(method="POST",enctype="multipart/form-data").upload__form.edit-profile__form
+        label(for="avatar") Avatar upload &rarr;
         input(type="file",name="avatar",accept=".png, .jpg, .jepg",id="avatar")
         input(placeholder="Name" type="text",name="name",required, value=loggedInUser.name)
         input(placeholder="Email" type="email",name="email",required, value=loggedInUser.email)
