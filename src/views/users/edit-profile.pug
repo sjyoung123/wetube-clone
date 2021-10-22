@@ -1,12 +1,12 @@
 extends ../base
 block content 
     span=errorMessage
-    -if(loggedInUser.avatarUrl.startsWith("upload"))
-        img(src="/" + loggedInUser.avatarUrl,height="100",width="100")
-    -if(loggedInUser.avatarUrl.startsWith("http"))
-        img(src=loggedInUser.avatarUrl,height="100",width="100")    
-    form(method="POST",enctype="multipart/form-data")
-        label(for="avatar") Avatar 
+    //- - if(loggedInUser.avatarUrl.startsWith("upload"))
+    //-     img(src="/" + loggedInUser.avatarUrl,height="100",width="100")
+    //- - if(loggedInUser.avatarUrl.startsWith("http"))
+    //-     img(src=loggedInUser.avatarUrl,height="100",width="100")    
+    form(method="POST",enctype="multipart/form-data").edit-profile__form
+        label(for="avatar") Avatar upload
         input(type="file",name="avatar",accept=".png, .jpg, .jepg",id="avatar")
         input(placeholder="Name" type="text",name="name",required, value=loggedInUser.name)
         input(placeholder="Email" type="email",name="email",required, value=loggedInUser.email)
@@ -14,5 +14,5 @@ block content
         input(placeholder="Location" type="text",name="location",required, value=loggedInUser.location)
         input(type="submit",value="Update")  
         if !loggedInUser.socialOnly
-            hr
-            a(href="change-password") Change Password &rarr;
+            div.edit-profile__password
+                a(href="change-password") Change Password &rarr;
