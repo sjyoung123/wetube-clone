@@ -2,7 +2,12 @@ extends ../base
 
 
 block content 
-    video(src="/" + video.videoUrl,controls,width="1000",height="600") 
+    video(src="/" + video.videoUrl,controls,width="1000",height="600")#video 
+    button#play Play
+    button#mute Mute 
+    span#time 00:00/00:00
+    input(type="range",min="0",max="1",step="0.1")#volume
+    
     //- div 
     //-     p=video.description
     //-     p=video.hashtags
