@@ -5,6 +5,8 @@ const volumeRange = document.getElementById("volume");
 const nowTime = document.getElementById("currentTime");
 const totalTime = document.getElementById("totalTime");
 const timeline = document.getElementById("timeline");
+const fullScreenBtn = document.getElementById("fullScreenBtn");
+const videoContainer = document.getElementById("videoContainer");
 
 const formatTime = (seconds) =>
   new Date(seconds * 1000).toISOString().substr(11, 8);
@@ -69,9 +71,21 @@ const handleTimeline = (event) => {
   video.currentTime = value;
 };
 
+const handleFullScreen = () => {
+  let fullscreen = document.fullscreenElement;
+  if (fullscreen) {
+    document.exitFullscreen();
+    fullScreenBtn.innerText = "Enter Full Screen";
+  } else {
+    videoContainer.requestFullscreen();
+    fullScreenBtn.innerText = "Exit Full Screen";
+  }
+};
+
 playBtn.addEventListener("click", handlePlayBtnClick);
 muteBtn.addEventListener("click", handleMuteBtnClick);
 volumeRange.addEventListener("input", handleVolumeRange);
 video.addEventListener("loadedmetadata", handleTotalTime);
 video.addEventListener("timeupdate", handleCurrentTime);
 timeline.addEventListener("input", handleTimeline);
+fullScreenBtn.addEventListener("click", handleFullScreen);
