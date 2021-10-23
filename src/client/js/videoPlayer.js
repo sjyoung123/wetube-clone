@@ -1,11 +1,14 @@
 const video = document.getElementById("video");
-
 const playBtn = document.getElementById("play");
 const muteBtn = document.getElementById("mute");
-const time = document.getElementById("time");
 const volumeRange = document.getElementById("volume");
+const nowTime = document.getElementById("currentTime");
+const totalTime = document.getElementById("totalTime");
 
-const handlePlayBtnClick = (e) => {
+const formatTime = (seconds) =>
+  new Date(seconds * 1000).toISOString().substr(11, 8);
+
+const handlePlayBtnClick = () => {
   if (video.paused) {
     video.play();
   } else {
@@ -14,29 +17,9 @@ const handlePlayBtnClick = (e) => {
   playBtn.innerText = video.paused ? "Play" : "Pause";
 };
 
-// const handleMuteBtnClick = (e) => {
-//   if (video.muted) {
-//     video.muted = false;
-//   } else {
-//     video.muted = true;
-//   }
-//   muteBtn.innerText = video.muted ? "Unmute" : "Mute";
-//   volumeRange.value = video.muted ? 0 : 0.5;
-//   video.volume = volumeRange.value;
-// };
-
-// const handleVolumeRange = (e) => {
-//   video.volume = volumeRange.value;
-//   if (volumeRange.value == 0) {
-//     muteBtn.innerText = "Unmute";
-//   } else {
-//     muteBtn.innerText = "Mute";
-//   }
-// };
-
 let volumeValue = 0.5;
 video.volume = volumeValue;
-const handleMuteBtnClick = (e) => {
+const handleMuteBtnClick = () => {
   if (video.muted) {
     video.muted = false;
   } else {
@@ -63,6 +46,30 @@ const handleVolumeRange = (event) => {
   }
 };
 
+const handleTotalTime = (event) => {
+  const {
+    target: { duration },
+  } = event;
+  totalTime.innerText = formatTime(Math.floor(duration));
+};
+const handleCurrentTime = (event) => {
+  const {
+    target: { currentTime },
+  } = event;
+  nowTime.innerText = formatTime(Math.floor(currentTime));
+};
+
 playBtn.addEventListener("click", handlePlayBtnClick);
 muteBtn.addEventListener("click", handleMuteBtnClick);
 volumeRange.addEventListener("input", handleVolumeRange);
+video.addEventListener("loadedmetadata", handleTotalTime);
+video.addEventListener("timeupdate", handleCurrentTime);
+
+// video.addEventListener("loadedmetadata", function (event) {
+//   setInterval(() => {
+//     let {
+//       target: { currentTime },
+//     } = event;
+//     nowTime.innerText = Math.round(currentTime);
+//   }, 1000);
+// });
