@@ -1,0 +1,45 @@
+#videoContainer {
+  width: 100%;
+  position: relative;
+  video {
+    width: 100%;
+  }
+  #timeline {
+    position: absolute;
+    bottom: 30px;
+    width: 95%;
+  }
+  .videoControls {
+    position: absolute;
+    width: 90%;
+    bottom: 20px;
+    right: 60px;
+    display: flex;
+    justify-content: space-around;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    &.show {
+      opacity: 1;
+    }
+    .videoControls__column {
+      display: flex;
+
+      button {
+        background-color: transparent;
+        color: white;
+        border: none;
+      }
+      &:first-child {
+        justify-content: space-around;
+        width: 40%;
+      }
+      &:nth-child(2) {
+        width: auto;
+      }
+      &:last-child {
+        justify-content: flex-end;
+        width: 40%;
+      }
+    }
+  }
+}

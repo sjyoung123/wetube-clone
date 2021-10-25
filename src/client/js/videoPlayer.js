@@ -18,7 +18,7 @@ const handlePlayBtnClick = () => {
   } else {
     video.pause();
   }
-  playBtn.innerText = video.paused ? "Play" : "Pause";
+  playBtn.classList = video.paused ? "fas fa-play" : "fas fa-pause";
 };
 
 let volumeValue = 0.5;
@@ -29,7 +29,7 @@ const handleMuteBtnClick = () => {
   } else {
     video.muted = true;
   }
-  muteBtn.innerText = video.muted ? "Unmute" : "Mute";
+  muteBtn.classList = video.muted ? "fas fa-volume-up" : "fas fa-volume-mute";
   volumeRange.value = video.muted ? 0 : volumeValue;
 };
 const handleVolumeRange = (event) => {
@@ -38,7 +38,7 @@ const handleVolumeRange = (event) => {
   } = event;
   if (video.muted) {
     video.muted = false;
-    muteBtn.innerText = "Mute";
+    muteBtn.classList = "fas fa-volume-mute";
   }
 
   volumeValue = Number(value);
@@ -46,7 +46,7 @@ const handleVolumeRange = (event) => {
 
   if (volumeValue === 0) {
     video.muted = true;
-    muteBtn.innerText = "Unmute";
+    muteBtn.classList = "fas fa-volume-up";
   }
 };
 
@@ -76,10 +76,10 @@ const handleFullScreen = () => {
   let fullscreen = document.fullscreenElement;
   if (fullscreen) {
     document.exitFullscreen();
-    fullScreenBtn.innerText = "Enter Full Screen";
+    fullScreenBtn.classList = "fas fa-expand";
   } else {
     videoContainer.requestFullscreen();
-    fullScreenBtn.innerText = "Exit Full Screen";
+    fullScreenBtn.classList = "fas fa-compress";
   }
 };
 
