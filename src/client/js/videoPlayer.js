@@ -134,6 +134,7 @@ const handleKeydown = (event) => {
       break;
     case 77: //m
       handleMuteBtnClick();
+      break;
   }
 };
 
@@ -148,5 +149,3 @@ timeline.addEventListener("input", handleTimeline);
 fullScreenBtn.addEventListener("click", handleFullScreen);
 videoContainer.addEventListener("mousemove", handleMouseMove);
 videoContainer.addEventListener("mouseleave", handleMouseLeave);
-
-//32 === space 70 === f -> === 39  <- === 37  up === 38 down === 40
