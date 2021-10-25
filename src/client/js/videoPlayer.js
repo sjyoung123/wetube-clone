@@ -102,12 +102,51 @@ const handleMouseMove = () => {
 const handleMouseLeave = () => {
   setTimeOutLeaveId = setTimeout(hidecontrols, 3000);
 };
+const handleVideoClick = () => {
+  handlePlayBtnClick();
+};
+
+const handleKeydown = (event) => {
+  switch (event.keyCode) {
+    case 32: //space
+      handlePlayBtnClick();
+      break;
+    case 70: //f
+      handleFullScreen();
+      break;
+    case 39: //right arrow
+      video.currentTime = Math.floor(video.currentTime + 5);
+      break;
+    case 37: //left arrow
+      video.currentTime = Math.floor(video.currentTime - 5);
+      break;
+    case 38: //up arrow
+      volumeValue += 0.1;
+      volumeRange.value = volumeValue;
+      video.volume = volumeRange.value;
+      event.preventDefault();
+      break;
+    case 40: //down arrow
+      volumeValue -= 0.1;
+      volumeRange.value = volumeValue;
+      video.volume = volumeRange.value;
+      event.preventDefault();
+      break;
+    case 77: //m
+      handleMuteBtnClick();
+  }
+};
+
 playBtn.addEventListener("click", handlePlayBtnClick);
 muteBtn.addEventListener("click", handleMuteBtnClick);
 volumeRange.addEventListener("input", handleVolumeRange);
 video.addEventListener("loadedmetadata", handleTotalTime);
 video.addEventListener("timeupdate", handleCurrentTime);
+video.addEventListener("click", handleVideoClick);
+window.addEventListener("keydown", handleKeydown);
 timeline.addEventListener("input", handleTimeline);
 fullScreenBtn.addEventListener("click", handleFullScreen);
-video.addEventListener("mousemove", handleMouseMove);
-video.addEventListener("mouseleave", handleMouseLeave);
+videoContainer.addEventListener("mousemove", handleMouseMove);
+videoContainer.addEventListener("mouseleave", handleMouseLeave);
+
+//32 === space 70 === f -> === 39  <- === 37  up === 38 down === 40
