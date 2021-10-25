@@ -110,6 +110,7 @@ const handleKeydown = (event) => {
   switch (event.keyCode) {
     case 32: //space
       handlePlayBtnClick();
+      event.preventDefault();
       break;
     case 70: //f
       handleFullScreen();
@@ -138,14 +139,22 @@ const handleKeydown = (event) => {
   }
 };
 
+const handleEnded = () => {
+  const { id } = videoContainer.dataset;
+  fetch(`/api/videos/${id}/view`, {
+    method: "POST",
+  });
+};
+
 playBtn.addEventListener("click", handlePlayBtnClick);
 muteBtn.addEventListener("click", handleMuteBtnClick);
 volumeRange.addEventListener("input", handleVolumeRange);
 video.addEventListener("loadedmetadata", handleTotalTime);
 video.addEventListener("timeupdate", handleCurrentTime);
 video.addEventListener("click", handleVideoClick);
-window.addEventListener("keydown", handleKeydown);
+video.addEventListener("ended", handleEnded);
 timeline.addEventListener("input", handleTimeline);
 fullScreenBtn.addEventListener("click", handleFullScreen);
 videoContainer.addEventListener("mousemove", handleMouseMove);
 videoContainer.addEventListener("mouseleave", handleMouseLeave);
+window.addEventListener("keydown", handleKeydown);

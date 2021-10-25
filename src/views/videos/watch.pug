@@ -2,7 +2,7 @@ extends ../base
 
 
 block content 
-    div#videoContainer
+    div#videoContainer(data-id=video._id)
         video(src="/" + video.videoUrl)#video
         div#videoControls.videoControls 
             div.videoControls__column
