@@ -1,6 +1,8 @@
 extends ../base
 
 block content
+    div
+        button#startRecord Start Record
     if errorMessage 
         span errorMessage
     form(method="POST",enctype="multipart/form-data").upload__form.upload-video__form
@@ -10,3 +12,6 @@ block content
         input(type="text" placeholder="Description" required name="description")
         input(type="text" placeholder="Hashtags, seperated by comma." required name="hashtags")
         input(type="submit" value="Upload Video") 
+
+    block script 
+        script(src="/static/js/recorder.js") 
