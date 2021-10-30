@@ -1,15 +1,24 @@
-import regeneratorRuntime from "regenerator-runtime";
+import regeneratorRuntime, { async } from "regenerator-runtime";
 
 const startRecordBtn = document.getElementById("startRecord");
 const video = document.getElementById("preview");
 
 let stream;
 let recorder;
+let videoFile;
+
+const handleDownload = () => {
+  const a = document.createElement("a");
+  a.href = videoFile;
+  a.download = "MyRecording.webm";
+  document.body.appendChild(a);
+  a.click();
+};
 
 const handleStop = () => {
-  startRecordBtn.innerText = "Start recording";
+  startRecordBtn.innerText = "Download recording";
   startRecordBtn.removeEventListener("click", handleStop);
-  startRecordBtn.addEventListener("click", handleStart);
+  startRecordBtn.addEventListener("click", handleDownload);
   recorder.stop();
 };
 
@@ -19,7 +28,7 @@ const handleStart = () => {
   startRecordBtn.addEventListener("click", handleStop);
   recorder = new MediaRecorder(stream);
   recorder.ondataavailable = (event) => {
-    const videoFile = URL.createObjectURL(event.data);
+    videoFile = URL.createObjectURL(event.data);
     video.srcObject = null;
     video.src = videoFile;
     video.loop = true;
