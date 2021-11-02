@@ -1,4 +1,4 @@
-import regeneratorRuntime, { async } from "regenerator-runtime";
+// import regeneratorRuntime, { async } from "regenerator-runtime";
 import { createFFmpeg, fetchFile } from "@ffmpeg/ffmpeg";
 
 const actionRecordBtn = document.getElementById("startRecord");
