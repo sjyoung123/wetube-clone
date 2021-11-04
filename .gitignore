@@ -2,3 +2,4 @@
 .env
 /upload
 /assets
+assets/js/main.js

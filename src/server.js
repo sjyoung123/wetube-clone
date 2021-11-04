@@ -1,6 +1,7 @@
 import express from "express";
 import morgan from "morgan";
 import session from "express-session";
+import flash from "express-flash";
 import MongoStore from "connect-mongo";
 import { localsMiddleware } from "./middleware";
 import rootRouter from "./routers/rootRouter";
@@ -29,6 +30,7 @@ app.use(
   })
 ); //Created before Router.
 
+app.use(flash());
 app.use(localsMiddleware);
 
 app.use("/", rootRouter);

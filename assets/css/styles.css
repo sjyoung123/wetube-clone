@@ -320,6 +320,38 @@ input[type=submit],
   width: 40%;
 }
 
+@keyframes goAway {
+  from {
+    opacity: 1;
+    transform: none;
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+}
+.message {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  max-width: 200px;
+  padding: 10px 20px;
+  border-radius: 10000px;
+  text-align: center;
+  animation: goAway 0.5s ease-in-out forwards;
+  animation-delay: 5s;
+}
+.message.error {
+  background-color: tomato;
+  color: white;
+}
+.message.info {
+  background-color: blanchedalmond;
+  color: black;
+}
+
 .search__form {
   display: flex;
   align-items: center;

@@ -33,6 +33,7 @@ export const getEdit = async (req, res) => {
   }
   console.log(video.owner);
   if (video.owner != _id) {
+    req.flash("error", "Not authorized");
     return res.status(403).redirect("/");
   }
   return res.render("videos/edit", {
@@ -52,6 +53,7 @@ export const postEdit = async (req, res) => {
   }
 
   if (video.owner != _id) {
+    req.flash("error", "You are not the the owner of the video.");
     return res.status(403).redirect("/");
   }
   await Video.findByIdAndUpdate(id, {
