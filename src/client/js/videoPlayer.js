@@ -8,6 +8,7 @@ const timeline = document.getElementById("timeline");
 const fullScreenBtn = document.getElementById("fullScreenBtn");
 const videoContainer = document.getElementById("videoContainer");
 const videoControls = document.getElementById("videoControls");
+const textarea = document.getElementById("commentTextarea");
 
 const formatTime = (seconds) =>
   new Date(seconds * 1000).toISOString().substr(11, 8);
@@ -107,6 +108,9 @@ const handleVideoClick = () => {
 };
 
 const handleKeydown = (event) => {
+  if (event.target === textarea) {
+    return;
+  }
   switch (event.keyCode) {
     case 32: //space
       handlePlayBtnClick();
