@@ -332,11 +332,12 @@ input[type=submit],
   align-items: flex-start;
   width: 100%;
 }
-.comments__container .video__comments hr {
+.comments__container .video__comments .video__comment {
   width: 100%;
-  opacity: 0.5;
-  margin: 20px 0;
+  padding: 20px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.5);
 }
+
 @keyframes goAway {
   from {
     opacity: 1;
