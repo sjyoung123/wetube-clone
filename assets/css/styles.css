@@ -320,6 +320,23 @@ input[type=submit],
   width: 40%;
 }
 
+.comments__container {
+  display: flex;
+  margin: 0 auto;
+  margin-top: 20px;
+  max-width: 60%;
+}
+.comments__container .video__comments {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+.comments__container .video__comments hr {
+  width: 100%;
+  opacity: 0.5;
+  margin: 20px 0;
+}
 @keyframes goAway {
   from {
     opacity: 1;
