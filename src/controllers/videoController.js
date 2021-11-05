@@ -149,12 +149,12 @@ export const createComment = async (req, res) => {
   } = req;
   const video = await Video.findById(id);
   if (!video) {
-    return req.sendStatus(404);
+    return res.sendStatus(404);
   }
   const comment = await Comment.create({
     text,
     owner: user._id,
     video: id,
   });
-  return req.sendStatus(201); //create
+  return res.sendStatus(201); //create
 };
