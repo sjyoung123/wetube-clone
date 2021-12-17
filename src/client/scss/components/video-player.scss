@@ -57,6 +57,8 @@
     width: 100%;
 
     .video__comment {
+      display: flex;
+      justify-content: space-between;
       width: 100%;
       padding: 20px;
       border-bottom: 2px solid rgba($color: #fff, $alpha: 0.5);
