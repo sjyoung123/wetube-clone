@@ -5,9 +5,9 @@ block content
     div.profile__data 
         if loggedInUser.avatarUrl
             if loggedInUser.avatarUrl.includes("github")
-                img.header__avatar(src=loggedInUser.avatarUrl).avatar
+                img.header__avatar(src=loggedInUser.avatarUrl crossorigin).avatar
             else
-                img.header__avatar(src=loggedInUser.avatarUrl).avatar
+                img.header__avatar(src=loggedInUser.avatarUrl crossorigin).avatar
         h3=user.username
     div.video-grid
         each video in user.videos
