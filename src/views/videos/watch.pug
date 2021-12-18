@@ -3,7 +3,7 @@ extends ../base
 
 block content 
     div#videoContainer(data-id=video._id)
-        video(src="/" + video.videoUrl)#video
+        video(src=video.videoUrl)#video
         div#videoControls.videoControls 
             div.videoControls__column
                 button#play.fas.fa-play

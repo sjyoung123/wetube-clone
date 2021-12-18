@@ -3,10 +3,11 @@ include ../mixins/video
 
 block content
     div.profile__data 
-        if loggedInUser.avatarUrl.includes("github")
-            img.header__avatar(src= loggedInUser.avatarUrl).avatar
-        else
-            img.header__avatar(src= "/"+loggedInUser.avatarUrl).avatar
+        if loggedInUser.avatarUrl
+            if loggedInUser.avatarUrl.includes("github")
+                img.header__avatar(src=loggedInUser.avatarUrl).avatar
+            else
+                img.header__avatar(src=loggedInUser.avatarUrl).avatar
         h3=user.username
     div.video-grid
         each video in user.videos
