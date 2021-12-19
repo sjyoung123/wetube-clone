@@ -8,6 +8,7 @@ export const home = async (req, res) => {
     const videos = await Video.find({})
       .sort({ creatAt: "desc" })
       .populate("owner");
+    console.log(videos[0].thumbUrl);
     return res.render("home", { pageTitle: "Home", videos });
   } catch {
     return res.render("server-error");
@@ -74,14 +75,14 @@ export const postUpload = async (req, res) => {
     user: { _id },
   } = req.session;
   const { video, thumb } = req.files;
-  console.log(video, thumb.path);
+
   const { title, description, hashtags } = req.body;
   try {
     const newVideo = await Video.create({
       title,
       description,
       videoUrl: video[0].location,
-      thumbUrl: thumb[0].destination + "/" + thumb[0].filename,
+      thumbUrl: thumb[0].location,
       hashtags: Video.formatHashtags(hashtags),
       owner: _id,
     });
