@@ -9,11 +9,18 @@ const s3 = new aws.S3({
   },
 });
 
-const multerUploader = multerS3({
+const s3AvatarUploader = multerS3({
   s3: s3,
-  bucket: "mywetubee",
+  bucket: "mywetubee/images",
   acl: "public-read",
-  // contentType: multerS3.AUTO_CONTENT_TYPE,
+  contentType: multerS3.AUTO_CONTENT_TYPE,
+});
+
+const s3VideoUploader = multerS3({
+  s3: s3,
+  bucket: "mywetubee/videos",
+  acl: "public-read",
+  contentType: multerS3.AUTO_CONTENT_TYPE,
 });
 
 export const localsMiddleware = (req, res, next) => {
@@ -47,12 +54,12 @@ export const avatarUpload = multer({
   limits: {
     fileSize: 3000000,
   },
-  storage: multerUploader,
+  storage: s3AvatarUploader,
 });
 export const videoUpload = multer({
   dest: "upload/videos",
   limits: {
     fileSize: 10000000,
   },
-  storage: multerUploader,
+  storage: s3VideoUploader,
 });
