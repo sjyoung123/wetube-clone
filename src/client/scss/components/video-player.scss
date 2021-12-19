@@ -62,6 +62,9 @@
       width: 100%;
       padding: 20px;
       border-bottom: 2px solid rgba($color: #fff, $alpha: 0.5);
+      i:hover {
+        cursor: pointer;
+      }
     }
   }
 }
