@@ -5,7 +5,7 @@ const videoSchema = new mongoose.Schema({
   videoUrl: { type: String, required: true },
   thumbUrl: { type: String, required: true },
   description: { type: String, required: true, trim: true },
-  creatAt: { type: Date, default: Date.now, required: true },
+  creatAt: { type: String, default: Date.now, required: true },
   hashtags: [{ type: String, trim: true }],
   meta: {
     views: { type: Number, default: 0, required: true },
@@ -23,6 +23,17 @@ videoSchema.static("formatHashtags", function (hashtags) {
     .map((word) =>
       word.trim().charAt(0) === "#" ? word.trim() : `#${word.trim()}`
     );
+});
+videoSchema.static("formatCreateAt", function (creatAt) {
+  const date = new Date(creatAt);
+  const newDate = date.toLocaleDateString("ko-KR", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+  return newDate;
 });
 
 const Video = mongoose.model("Video", videoSchema);

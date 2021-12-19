@@ -8,7 +8,7 @@ export const home = async (req, res) => {
     const videos = await Video.find({})
       .sort({ creatAt: "desc" })
       .populate("owner");
-    console.log(videos[0].thumbUrl);
+
     return res.render("home", { pageTitle: "Home", videos });
   } catch {
     return res.render("server-error");
@@ -34,7 +34,7 @@ export const getEdit = async (req, res) => {
   if (!video) {
     return res.status(404).render("404", { pageTitle: "Video not found" });
   }
-  console.log(video.owner);
+
   if (video.owner != _id) {
     req.flash("error", "Not authorized");
     return res.status(403).redirect("/");
@@ -85,6 +85,7 @@ export const postUpload = async (req, res) => {
       thumbUrl: thumb[0].location,
       hashtags: Video.formatHashtags(hashtags),
       owner: _id,
+      creatAt: Video.formatCreateAt(Date.now()),
     });
     const user = await User.findById(_id);
     user.videos.unshift(newVideo._id);

@@ -15,8 +15,7 @@ const app = express();
 //app.disable("x-powered-by");
 
 app.set("view engine", "pug");
-app.set("views", "./src/views");
-
+app.set("views", process.cwd() + "/src/views");
 app.use(logger);
 
 app.use(express.urlencoded({ extended: true }));
